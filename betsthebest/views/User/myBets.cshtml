@@ -1,0 +1,49 @@
+﻿@using BetsTheBest.Models
+@model IEnumerable<BetEventViewModel>
+@{
+    ViewBag.Title = "myBets";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Мои ставки</h2>
+
+<div id="myBets">
+    @if (Model != null)
+    {
+        <table id="bettable" class="infotable table">
+            <thead>
+                <tr>
+                    <th hidden>IdBet</th>
+                    <th hidden>IdEvent</th>
+                    <th>Событие</th>
+                    <th>Состояние</th>
+                    <th>Дата</th>
+                    <th>Тип</th>
+                    <th>Ставка</th>
+                    <th>Текущий коэфициент</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (BetEventViewModel item in Model)
+                {
+                    string bgcolor = "white";
+                    if (item.currBet.state=="won")
+                        {bgcolor = "lightgreen";}
+                    else if (item.currBet.state=="lost")
+                        {bgcolor = "pink";}
+
+                    <tr bgcolor=@bgcolor>
+                        <td hidden>@item.currBet.Id</td>
+                        <td hidden>@item.currEvent.Id</td>
+                        <td>@item.currEvent.command1 - @item.currEvent.command2</td>
+                        <td>@item.currBet.state</td>
+                        <td>@item.currEvent.date.ToString("dd.MM.yyyy")</td>
+                        <td>@item.currBet.betType</td>
+                        <td>@item.currBet.amount</td>
+                        <td>@item.betСoefficient</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

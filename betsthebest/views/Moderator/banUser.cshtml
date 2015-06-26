@@ -1,0 +1,28 @@
+﻿@using BetsTheBest.Models
+@model IEnumerable<ApplicationUser>
+@{
+    ViewBag.Title = "banUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Управление пользователями</h2>
+
+
+<div id="banUser">
+    @using (Html.BeginForm("banUser", "Moderator"))
+    {
+        if (Model != null)
+        { 
+            <select name="uId">
+                @foreach(ApplicationUser item in Model)
+                {
+                    string color = item.userStatus == UserSatus.baned ? "red": "white";
+                    <option value="@item.Id" style="background-color: @color" >@item.UserName</option>
+                }
+            </select>
+            <button type="submit" class="btn btn-success" name="operation" value="unban" >Разбанить</button>
+            <button type="submit" class="btn btn-danger" name="operation" value="ban" >Забанить</button>
+        }   
+    }
+</div>
+

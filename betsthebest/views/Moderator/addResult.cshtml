@@ -1,0 +1,23 @@
+﻿@model BetsTheBest.Models.Results
+
+@{
+    ViewBag.Title = "addResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Добавить новое событие</h2>
+
+@using (Html.BeginForm("addResult", "Moderator"))
+{
+    <div class="row form-group">
+        <div class="col-md-5">
+            @Html.LabelFor(m => m.eId, new { @class = "col-sm-4 text-right" })
+            @Html.EditorFor(m => m.eId, new { @class = "form-control" })
+        </div>
+        <div class="col-md-5">
+            @Html.LabelFor(m => m.result, new { @class = "col-sm-4 text-right" })
+            @Html.EditorFor(m => m.result, new { @class = "form-control" })
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Добавить результат</button>
+}

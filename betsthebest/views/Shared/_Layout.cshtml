@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+@using BetsTheBest.Controllers
+@using BetsTheBest.Models
+@using System.Collections.Generic
+<html>
+<head>
+    @Scripts.Render("~/scripts/jquery-2.1.4.min.js")
+    @Scripts.Render("~/scripts/bootstrap.min.js")
+    @Styles.Render("~/content/bootstrap.css")
+    @Styles.Render("~/content/main.css")
+    <meta name="viewport" content="width=device-width" />
+    <title>BetsTheBest</title>
+    <script>
+        function main() {
+            window.location.replace('/');
+        };
+        ScrollNews = function (n, i, news) {
+            var message = news.eq(i);
+            var ml = $(".moving_line");
+            ml.find("div").html(message.html());
+            ml.click(function (e) { window.location.href = message.attr("href"); });
+            setTimeout(function () { ScrollNews(n, (i + 1) % n, news); }, 28000);
+            ml.find("div").css("width", "200%");
+            var reset = function () {
+                $(this).css("margin-left", "100%");
+                $(this).animate({ "margin-left": "-120%" }, 12000, 'linear', reset);
+            };
+            reset.call(ml.find("div"));
+        };
+        FeedbackWindow = function () {
+            var w = document.createElement("iframe");
+            w.setAttribute("src", '@Url.Content("~/Home/Feedback")');
+            w.setAttribute("style", "top: 25%; left: 25%; width: 50%; position: absolute; " +
+                            "height: 50%; background: white");
+            document.body.appendChild(w);
+        };
+    </script>
+</head>
+<body>
+    <div class="header">
+        <style>
+            #messageContainer div{
+                opacity: 0.8;
+            }
+        </style>
+        <span class="slogan">
+            <p>Удобные ставки</p>
+            <p style="padding-left: 25%">в любое время</p>
+        </span>
+        <img class="logo" onclick="main();" src=@Url.Content("~/Images/logo.png") />
+        <div style="position: absolute; z-index: 1; width: 50%; margin: 0; margin-left: 25%;" id="messageContainer">
+            @if (ViewData["badState"] != null)
+            {
+                <div class="alert alert-danger fade in" >
+                    <button type="button" class="close" onclick="$('.alert').alert('close')">&times;</button>
+                    <p>@ViewData["badState"]</p>
+
+                </div>
+            }
+
+            @if (ViewData["goodState"] != null)
+            {
+                <div class="alert alert-success fade in">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <p>@ViewData["goodState"]</p>
+                </div>
+            }
+        </div>
+        
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div style="margin-left: 75%; width: 25%; height: 100%;">
+                    <div id="empty" style="width: 10%; height: 100%; display: inline-block;">
+                    </div>
+
+                    <div id="Authorization" style="display: inline-block;">
+                        @{Html.RenderPartial("_LoginPartial", new BetsTheBest.Models.LoginViewModel());}
+                    </div>
+
+                </div>
+            }
+            else
+            {
+                <div id="Authorization" style="display: inline-block; margin-left: 75%;">
+                    @{Html.RenderPartial("_LoginPartial", new BetsTheBest.Models.LoginViewModel());}
+                </div>
+            }
+    </div>
+
+    <div class="header2style">
+        <ul style="margin: 0; float: right; width: 50%">
+            <li style="float: left; margin-right: 5%"><a href=@Url.Content("~/Home/Rules")>Правила</a></li>
+            <li style="float: left; margin-right: 5%"><a href="">Результаты</a></li>
+            <li style="float: left; margin-right: 5%"><a href="">Платежи</a></li>
+            <li style="float: left; margin-right: 5%"><a onclick="FeedbackWindow();">Обратная связь</a></li>
+            <li style="float: left; margin-right: 5%"><a href="">Карта сайта</a></li>
+        </ul>
+        <div style="float: right; margin-right: 1%">■</div>
+        <div class="moving_line"><div></div></div>
+        <div style="float: right; margin-right: 0.5%">■</div>
+    </div>
+    <div class="main_menu">
+        <div class="menu_item">
+            <p><a href="~/Home/Upcoming">Предстоящее</a></p>
+        </div>
+        <div class="menu_item">
+            <p><a href="~/Home/Live">Текущее</a></p>
+        </div>
+        <div class="menu_item">
+            <p><a href="">Телетрансляции</a></p>
+        </div>
+        <div class="menu_item">
+            <p><a href="">Контакты</a></p>
+        </div>
+        <div class="menu_item">
+            <p><a href="~/Home/About">О конторе</a></p>
+        </div>
+
+        <div id="BetContainerDiv">
+            <ul id="BetContainer" style="display: inline-block;">
+                <li id="template" hidden style="border: 1px solid">
+                    <h4 style="border: 1px solid; text-align:center;" onclick="this.parentNode.remove()">Сделать ставку</h4>
+                    @using (Html.BeginForm("doBet", "User"))
+                    {
+                        <p id="game"></p>
+                        <p id="bet"></p>
+                        <input type="number" hidden name="betEventId" value="0" />
+                        <input type="text" hidden name="betType" value="" />
+                        <input type="number" name="amount" step="0.1" value="0" />
+                        <button type="submit">Сделать ставку</button>
+                    }
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main_content">
+        @RenderBody()
+    </div>
+
+    <div class="footer">
+        <div style="padding: 10px 0 10px 0; margin-right: 20px; text-align: right">
+            <p style="margin: 0">(c) 2014-2015 Bets The Best</p>
+            <p style="margin: 0">Sergey, SPb ITMO</p>
+        </div>
+    </div>
+    
+    <div id="tempContent1" style="display:none">
+        @{
+            IEnumerable<News> news = new ApplicationDbContext().news;
+        }
+        @foreach(News n in news) {
+            <a href=@n.href>@n.title</a>
+        }
+    </div>
+
+    <script>
+        window.onload = function () {
+            var news = $("#tempContent1").find("a");
+            ScrollNews(news.length, Math.round(Math.random() * (news.length - 1)), news);
+        };
+    </script>
+</script>
+</body>
+</html>
+

@@ -1,0 +1,22 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Feedback</title>
+</head>
+<body>
+    <div style="margin-left: 20px">
+	<p style="font-size: larger">Обратная связь</p>
+    @using(Html.BeginForm("Feedback", "Home")) {
+	    <label>Тема<input type=text name="subj" size="40" style="margin-left: 5px" /></label>
+	    <p style="margin: 0; margin-top: 20px">Сообщение</p>
+	    <textarea name="text" rows="10" cols="60"></textarea>
+	    <p><button type="submit" class="btn btn-success">Отправить</button></p>
+    }
+	</div>
+</body>
+</html>

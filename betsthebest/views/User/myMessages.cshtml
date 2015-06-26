@@ -1,0 +1,69 @@
+﻿@using BetsTheBest.Models
+@using Microsoft.AspNet.Identity
+@using System.Collections.Generic
+@model IEnumerable<Messages>
+@{
+    ViewBag.Title = "myMessages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Мои сообщения</h2>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Входящие</div>
+  <table class="table" style="table-layout:fixed">
+    <thead>
+        <th>Отправитель</th>
+        <th>Сообщение</th>
+        <th>Дата</th>
+    </thead>
+    <tbody>
+        @foreach(Messages m in Model) {
+            if (m.dest==User.Identity.GetUserName()) {
+            <tr style="display:table-row">
+                <td>@m.src</td>
+                <td style="word-wrap:break-word">@m.text</td>
+                <td>@m.date</td>
+            </tr>
+            }
+        }
+    </tbody>
+  </table>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Исходящие</div>
+  <table class="table" style="table-layout:fixed">
+    <thead>
+        <th>Получатель</th>
+        <th>Сообщение</th>
+        <th>Дата</th>
+    </thead>
+    <tbody>
+        @foreach(Messages m in Model) {
+            if (m.src==User.Identity.GetUserName()) {
+            <tr>
+                <td>@m.dest</td>
+                <td style="word-wrap:break-word">@m.text</td>
+                <td>@m.date</td>
+            </tr>
+            }
+        }
+    </tbody>
+  </table>
+</div>
+
+<div>
+    @using (Html.BeginForm("myMessages", "User"))
+    {
+        IEnumerable<ApplicationUser> users = new ApplicationDbContext().Users;
+        <select name="dest">
+                @foreach(ApplicationUser item in users)
+                {
+                    <option value="@item.Email" >@item.Email</option>
+                }
+        </select>
+        <div><textarea name="text" rows="10" cols="60"></textarea></div>
+        <button type="submit" class="btn btn-success">Отправить</button>
+    }
+</div>

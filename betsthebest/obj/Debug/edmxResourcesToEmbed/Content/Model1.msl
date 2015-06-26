@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="Model.AspNetUsers">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="userAmount" ColumnName="userAmount" />
+          <ScalarProperty Name="userStatus" ColumnName="userStatus" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bets">
+      <EntityTypeMapping TypeName="Model.Bets">
+        <MappingFragment StoreEntitySet="Bets">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="betEventId" ColumnName="betEventId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="betType" ColumnName="betType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Messages">
+      <EntityTypeMapping TypeName="Model.Messages">
+        <MappingFragment StoreEntitySet="Messages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="src" ColumnName="src" />
+          <ScalarProperty Name="dest" ColumnName="dest" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="News">
+      <EntityTypeMapping TypeName="Model.News">
+        <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="href" ColumnName="href" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payments">
+      <EntityTypeMapping TypeName="Model.Payments">
+        <MappingFragment StoreEntitySet="Payments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="paymentDate" ColumnName="paymentDate" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Results">
+      <EntityTypeMapping TypeName="Model.Results">
+        <MappingFragment StoreEntitySet="Results">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="result" ColumnName="result" />
+          <ScalarProperty Name="eId" ColumnName="eId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SportEvents">
+      <EntityTypeMapping TypeName="Model.SportEvents">
+        <MappingFragment StoreEntitySet="SportEvents">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="command1" ColumnName="command1" />
+          <ScalarProperty Name="command2" ColumnName="command2" />
+          <ScalarProperty Name="gameType" ColumnName="gameType" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="tournament" ColumnName="tournament" />
+          <ScalarProperty Name="firstWin" ColumnName="firstWin" />
+          <ScalarProperty Name="secondWin" ColumnName="secondWin" />
+          <ScalarProperty Name="gameTie" ColumnName="gameTie" />
+          <ScalarProperty Name="tieByFirst" ColumnName="tieByFirst" />
+          <ScalarProperty Name="tieBySecond" ColumnName="tieBySecond" />
+          <ScalarProperty Name="overallTie" ColumnName="overallTie" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="b" ColumnName="b" />
+          <ScalarProperty Name="m" ColumnName="m" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="time" ColumnName="time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,40 @@
+﻿@using BetsTheBest.Models
+@model IEnumerable<Payment>
+@{
+    ViewBag.Title = "myPayments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Мои платежи</h2>
+
+
+<div id="newPayment" style="width: 90%; margin-top: 45px; margin-left: auto; margin-right: auto; height: 100px; ">
+    @using (Html.BeginForm("newPayment", "User"))
+    {
+        <label>Укажите сумму</label>
+        <input type="number" step="0.1" value="0" name="amount" />
+        <button type="submit" class="btn btn-primary">Внести на счет</button>
+    }
+</div>
+
+<div id="myPaymentsContainer">
+    @if (Model != null)
+    {
+        <table class="infotable table">
+            <thead>
+                <tr>
+                    <th class="text-center">Дата</th>
+                    <th class="text-center">Сумма</th>
+                </tr>
+            </thead>
+
+            @foreach (Payment item in Model)
+            {
+                <tr>
+                    <td>@item.paymentDate.ToString("dd.MM.yyyy HH:mm")</td>
+                    <td>@item.amount</td>
+                </tr>
+            }
+        </table>
+    }
+</div>

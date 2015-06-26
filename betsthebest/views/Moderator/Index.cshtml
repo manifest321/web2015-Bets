@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Функции модератора</h2>
+
+<ul>
+    <li>@Html.ActionLink("Добавить результат", "addResult", "Moderator")</li>
+    <li>@Html.ActionLink("Добавить новое событие", "addEvent", "Moderator")</li>
+    <li>@Html.ActionLink("Управление пользователями ", "banUser", "Moderator")</li>
+</ul>

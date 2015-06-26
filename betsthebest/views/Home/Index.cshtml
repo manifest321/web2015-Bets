@@ -1,0 +1,105 @@
+﻿@using BetsTheBest.Models
+@model IEnumerable<SportEvent>
+@{
+    ViewBag.Title = "BetsTheBest";
+}
+
+<script>
+    function addBet(curr, betType, authorized)
+    {
+        var par = curr.parentNode;
+        var betContainer = document.getElementById('BetContainer');
+        if (authorized == "False") {
+            alert("Войдите для того, чтобы сделать ставку");
+            return;
+        }
+        var tmplte = document.getElementById("template");
+        var currBet = tmplte.cloneNode(true)
+        currBet.removeAttribute("hidden");
+        currBet.removeAttribute("id");
+        betContainer.appendChild(currBet);
+        var currBetForm = currBet.children[1];
+        currBetForm.children[0].innerHTML = par.children[4].innerHTML + " " + par.children[1].innerHTML + " - " + par.children[2].innerHTML;
+        currBetForm.children[1].innerHTML = curr.innerHTML;
+        currBetForm.children[2].value = par.children[0].innerHTML;
+        currBetForm.children[3].value = betType;
+    }
+</script>
+
+<style>
+    table thead tr th
+    {
+        text-align: center;
+    }
+</style>
+
+<div>
+    @if (Model != null)
+    {
+        <table class="infotable table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Команда 1</th>
+                    <th>Команда 2</th>
+                    <th>Дата</th>
+                    <th>Время</th>
+                    <th>Игра</th>
+                    <th>Состязание</th>
+                    <th>Состояние</th>
+                    <th>П1</th>
+                    <th>П2</th>
+                    <th>Н </th>
+                    <th>Н1</th>
+                    <th>Н2</th>
+                    <th>НН</th>
+                    <th>Тотал</th>
+                    <th>Б</th>
+                    <th>М</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(SportEvent item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.command1</td>
+                        <td>@item.command2</td>
+                        <td>@item.date.ToString("dd.MM.yyyy")</td>
+                        <td>@item.time.ToString("HH:mm")</td>
+                        <td>@item.gameType</td>
+                        <td>@item.tournament</td>
+                        <td>
+                            @if (User.IsInRole("moderator"))
+                            {
+                                using(Html.BeginForm("changeEventState","Moderator"))
+                                {
+                                    <input type="hidden" name="eventId" value="@item.Id" />
+                                    <select name="state">
+                                        <option selected disabled>@item.state</option> 
+                                        <option>превью</option>
+                                        <option>лайв</option>
+                                        <option>закончен</option>   
+                                    </select>
+                                    <button type="submit" class="btn  btn-info btn-sm"><span class="glyphicon glyphicon-ok"></span></button>
+                                }
+                            }
+                            else
+                            { <span>@item.state</span>}
+                        
+                        </td>
+                        <td onclick="addBet(this,'П1', '@User.Identity.IsAuthenticated.ToString()')">@item.firstWin</td>
+                        <td onclick="addBet(this,'П2', '@User.Identity.IsAuthenticated.ToString()')">@item.secondWin</td>
+                        <td onclick="addBet(this,'Н', '@User.Identity.IsAuthenticated.ToString()') ">@item.gameTie</td>
+                        <td onclick="addBet(this,'Н1', '@User.Identity.IsAuthenticated.ToString()')">@item.tieByFirst</td>
+                        <td onclick="addBet(this,'Н2', '@User.Identity.IsAuthenticated.ToString()')">@item.tieBySecond</td>
+                        <td onclick="addBet(this,'НН', '@User.Identity.IsAuthenticated.ToString()')">@item.overallTie</td>
+                        <td onclick="addBet(this,'Тотал', '@User.Identity.IsAuthenticated.ToString()')">@item.total</td>
+                        <td onclick="addBet(this,'Б', '@User.Identity.IsAuthenticated.ToString()')">@item.b</td>
+                        <td onclick="addBet(this,'М', '@User.Identity.IsAuthenticated.ToString()')">@item.m</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

@@ -1,0 +1,54 @@
+﻿@model  BetsTheBest.Models.LoginViewModel
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div style="text-align:right">
+            <p style="margin: 0;">
+                @{string bill = (ViewBag.userBill==null) ? "" : (" Счёт: "+ViewBag.userBill.ToString());}
+                @Html.ActionLink("Здравствуйте, " + User.Identity.GetUserName() + "!" + bill, "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </p>
+            <p style="margin: 0;">
+                @if (User.IsInRole("moderator"))
+                {@Html.ActionLink("ЛК модератора", "Index", "Moderator")}
+            </p>
+            <p style="margin: 0;">
+                @Html.ActionLink("Личный кабинет", "Index", "User")
+            </p>
+            <p style="margin: 0;"><a href="javascript:document.getElementById('logoutForm').submit()" class="">Выйти</a></p>
+        </div>
+    }
+}
+else
+{
+    <div>
+        @using (Html.BeginForm("Login", "Account"))
+        {
+            @Html.AntiForgeryToken()
+            <div style="display: inline-block; width: 320px;">
+                <div class="form-inline">
+                    @Html.LabelFor(m => m.Email, new  {@class="col-sm-3" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control col-sm-8" })
+                </div>
+                <div class="form-inline">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-sm-3" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control col-sm-8" })
+                </div>
+            </div>
+            <div class="form-inline">
+            <span>
+                <input type="submit" value="Выполнить вход" class="btn btn-primary btn-sm" />
+            </span>
+            <span>
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe)
+            </span>
+            <p style="display:inline-block">@Html.ActionLink("Регистрация", "Register", "Account")</p>
+            </div>
+        }
+    </div>
+}
+       

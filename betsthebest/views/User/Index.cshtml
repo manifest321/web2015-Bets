@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ul>
+    <li>@Html.ActionLink("Мои ставки", "myBets", "User")</li>
+    <li>@Html.ActionLink("Мои платежи", "myPayments", "User")</li>
+    <li>@Html.ActionLink("Мои сообщения", "myMessages", "User")</li>
+</ul>
+

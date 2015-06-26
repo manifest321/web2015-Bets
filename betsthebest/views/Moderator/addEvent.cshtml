@@ -1,0 +1,108 @@
+﻿@model BetsTheBest.Models.SportEvent
+@{
+    ViewBag.Title = "addEvent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Добавить новое событие</h2>
+
+<script>
+    function replaceDots()
+    {
+        this.innerHTML = String(this.innerHTML).replace('.', ',');
+    }
+</script>
+
+@using (Html.BeginForm("addEvent", "Moderator"))
+{
+    <div class="row form-group">
+        <div class="col-md-5">
+            @Html.LabelFor(m => m.command1, new { @class = "col-sm-4 text-right" })
+            @Html.EditorFor(m => m.command1, new { @class = "form-control" })
+        </div>
+        <div class="col-md-5">
+            @Html.LabelFor(m => m.command2, new { @class = "col-sm-4 text-right" })
+            @Html.EditorFor(m => m.command2, new { @class = "form-control" })
+        </div>
+    </div>
+    
+    <div class="row form-group">
+        <div class="col-md-5">
+            @Html.LabelFor( m => m.gameType, new { @class="col-sm-4 text-right" })
+            @Html.DropDownListFor(m => m.gameType, ViewBag.gameType as IEnumerable<SelectListItem>, new { @class="col-sm-5" })
+        </div>
+        <div class="col-md-5">
+            @Html.LabelFor(m => m.tournament, new { @class = "col-sm-4 text-right" })
+            @Html.DropDownListFor(m => m.tournament, ViewBag.sportTour as IEnumerable<SelectListItem>)
+        </div>
+        <div class="col-md-5">
+            @Html.LabelFor(m => m.state, new { @class = "col-sm-4 text-right" })
+            @Html.DropDownListFor(m => m.state, ViewBag.gameState as IEnumerable<SelectListItem>)
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-5">
+            @Html.LabelFor(m => m.date, new { @class = "col-sm-4 text-right" })
+            @Html.EditorFor(m => m.date)                
+        </div>
+        <div class="col-md-5">
+            @Html.LabelFor(m => m.time, new { @class = "col-sm-4 text-right" })
+            @Html.EditorFor(m => m.time)
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-5">
+            @Html.LabelFor(m => m.firstWin, new { @class = "col-sm-4 text-right" })
+            @Html.EditorFor(m => m.firstWin)
+        </div>
+        <div class="col-md-5">
+            @Html.LabelFor(m => m.secondWin, new { @class = "col-sm-4 text-right" })
+            @Html.EditorFor(m => m.secondWin)
+        </div>
+    </div>
+
+
+    <div class="row form-group">
+        <div class="col-md-5">
+            @Html.LabelFor(m => m.overallTie, new { @class = "col-sm-4 text-right" })
+            @Html.EditorFor(m => m.overallTie, new { @class = "col-sm-4 text-right" })
+        </div>
+        <div class="col-md-5">
+            @Html.LabelFor(m => m.gameTie, new { @class = "col-sm-4 text-right" })
+            @Html.EditorFor(m => m.gameTie)
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-5">
+            @Html.LabelFor(m => m.tieByFirst, new { @class = "col-sm-4 text-right" })
+            @Html.EditorFor(m => m.tieByFirst)
+        </div>
+        <div class="col-md-5">
+            @Html.LabelFor(m => m.tieBySecond, new { @class = "col-sm-4 text-right" })
+            @Html.EditorFor(m => m.tieBySecond)
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-5">
+            @Html.LabelFor(m => m.b, new { @class = "col-sm-4 text-right" })
+            @Html.EditorFor(m => m.b)
+        </div>
+        <div class="col-md-5">
+            @Html.LabelFor(m => m.m, new { @class = "col-sm-4 text-right" })
+            @Html.EditorFor(m => m.m)
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-5">
+            @Html.LabelFor(m => m.total, new { @class = "col-sm-4 text-right" })
+            @Html.EditorFor(m => m.total)
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Добавить событие</button>
+}
+

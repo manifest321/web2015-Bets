@@ -1,0 +1,167 @@
+﻿html, body {
+    margin: 0;
+    font-family: Tahoma;
+    height: 100%;
+}
+
+p a
+{
+    text-decoration: none;
+    color: White;
+}
+
+p a:hover
+{
+    color: Yellow;
+}
+
+li a
+{
+    text-decoration: none;
+    color: Black;
+}
+
+li a:hover
+{
+    background-color: Gray;
+    color: White;
+}
+
+.header
+{
+    background-color:#ab0100;
+    background-image: url(http://localhost:49332/Images/0.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 90px;
+    border-bottom: solid;
+    border-bottom-width: 2px;
+}
+
+.logo
+{
+    position: absolute;
+    height: inherit;
+    margin-left: 40%;
+}
+
+.slogan {
+    position: absolute;
+    padding-left: 80px;
+    padding-top: 0;
+    width: 30%;
+    color: white;
+}
+
+.header2
+{
+    height: 20px;
+    background-color: #CCCCCC;
+    font-size: 14px;
+}
+
+.moving_line
+{
+    float: right;
+    width: 25%;
+    margin-left: 2px;
+    overflow: hidden;
+    margin-right: 2px;
+}
+
+.main_menu 
+{
+    width: 20%;
+    margin-left: 10px;
+    margin-top: 10px;
+    float: left;
+}
+
+.menu_item
+{
+    height: 40px;
+    background-image: url(http://localhost:49332/Images/button.png);
+    background-size: 100% 100%;
+    text-align: center;
+}
+
+.menu_item p {
+    margin: 0;
+    padding-top: 10px;
+}
+
+.main_content
+{
+    float: left;
+    width: 75%;
+    min-height: 100%;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.infotable {
+      border-collapse: collapse;
+      font-size: 12px;
+}               
+ 
+.infotable tr, td {
+      padding: 5px;
+      border: 1px solid Black;
+      height: 100%;
+      text-align: center;
+      vertical-align: text-top;
+}
+
+.bettd {
+    padding: 0;
+}
+
+.betcell {
+    padding: 5px;
+}
+
+.betcell:hover {
+    padding: 5px 0 5px 0;
+    display: block; width: 100%;
+    background-color: #EEEEEE;
+}
+
+.infotable thead {
+      color: White;
+      background: #ab0100;
+}
+
+.betlist
+{
+    background-color: #eeeeee;
+    text-align: center;
+    width: 18.5%;
+    margin-left: 1.5%;
+    position: absolute;
+    top: 50%;
+}
+
+.betrec 
+{
+    padding: 3px;
+    border-bottom: 1px solid Black;
+    font-size: smaller;
+}
+
+.footer {
+    clear: both;
+    width: 100%;
+    background-color: #EEEEEE;
+}
+
+.form-inline label {
+    color: white;
+}
+
+.form-inline p {
+    margin-left: 25px;
+}
+
+.whitep {
+    color: white;
+}

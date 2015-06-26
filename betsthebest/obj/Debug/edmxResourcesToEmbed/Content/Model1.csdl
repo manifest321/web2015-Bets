@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="AspNetUsers" EntityType="Model.AspNetUsers" />
+    <EntitySet Name="Bets" EntityType="Model.Bets" />
+    <EntitySet Name="Messages" EntityType="Model.Messages" />
+    <EntitySet Name="News" EntityType="Model.News" />
+    <EntitySet Name="Payments" EntityType="Model.Payments" />
+    <EntitySet Name="Results" EntityType="Model.Results" />
+    <EntitySet Name="SportEvents" EntityType="Model.SportEvents" />
+    <AssociationSet Name="FK_dbo_Bets_dbo_AspNetUsers_userId" Association="Model.FK_dbo_Bets_dbo_AspNetUsers_userId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Bets" EntitySet="Bets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Payments_dbo_AspNetUsers_userId" Association="Model.FK_dbo_Payments_dbo_AspNetUsers_userId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Payments" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Bets_dbo_SportEvents_betEventId" Association="Model.FK_dbo_Bets_dbo_SportEvents_betEventId">
+      <End Role="SportEvents" EntitySet="SportEvents" />
+      <End Role="Bets" EntitySet="Bets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Results_ToEvents" Association="Model.FK_Results_ToEvents">
+      <End Role="SportEvents" EntitySet="SportEvents" />
+      <End Role="Results" EntitySet="Results" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="userAmount" Type="Single" Nullable="false" />
+    <Property Name="userStatus" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Bets" Relationship="Model.FK_dbo_Bets_dbo_AspNetUsers_userId" FromRole="AspNetUsers" ToRole="Bets" />
+    <NavigationProperty Name="Payments" Relationship="Model.FK_dbo_Payments_dbo_AspNetUsers_userId" FromRole="AspNetUsers" ToRole="Payments" />
+  </EntityType>
+  <EntityType Name="Bets">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="betEventId" Type="Int32" Nullable="false" />
+    <Property Name="userId" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="amount" Type="Single" Nullable="false" />
+    <Property Name="state" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="betType" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Model.FK_dbo_Bets_dbo_AspNetUsers_userId" FromRole="Bets" ToRole="AspNetUsers" />
+    <NavigationProperty Name="SportEvents" Relationship="Model.FK_dbo_Bets_dbo_SportEvents_betEventId" FromRole="Bets" ToRole="SportEvents" />
+  </EntityType>
+  <EntityType Name="Messages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="text" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="src" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="dest" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="href" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Payments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="paymentDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="amount" Type="Single" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Model.FK_dbo_Payments_dbo_AspNetUsers_userId" FromRole="Payments" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="Results">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="result" Type="Int32" Nullable="false" />
+    <Property Name="eId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SportEvents" Relationship="Model.FK_Results_ToEvents" FromRole="Results" ToRole="SportEvents" />
+  </EntityType>
+  <EntityType Name="SportEvents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="command1" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="command2" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="gameType" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="tournament" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="firstWin" Type="Single" />
+    <Property Name="secondWin" Type="Single" />
+    <Property Name="gameTie" Type="Single" />
+    <Property Name="tieByFirst" Type="Single" />
+    <Property Name="tieBySecond" Type="Single" />
+    <Property Name="overallTie" Type="Single" />
+    <Property Name="total" Type="Single" />
+    <Property Name="b" Type="Single" />
+    <Property Name="m" Type="Single" />
+    <Property Name="state" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="time" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Bets" Relationship="Model.FK_dbo_Bets_dbo_SportEvents_betEventId" FromRole="SportEvents" ToRole="Bets" />
+    <NavigationProperty Name="Results" Relationship="Model.FK_Results_ToEvents" FromRole="SportEvents" ToRole="Results" />
+  </EntityType>
+  <Association Name="FK_dbo_Bets_dbo_AspNetUsers_userId">
+    <End Role="AspNetUsers" Type="Model.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Bets" Type="Model.Bets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bets">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Payments_dbo_AspNetUsers_userId">
+    <End Role="AspNetUsers" Type="Model.AspNetUsers" Multiplicity="1" />
+    <End Role="Payments" Type="Model.Payments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payments">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Bets_dbo_SportEvents_betEventId">
+    <End Role="SportEvents" Type="Model.SportEvents" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Bets" Type="Model.Bets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SportEvents">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bets">
+        <PropertyRef Name="betEventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Results_ToEvents">
+    <End Role="SportEvents" Type="Model.SportEvents" Multiplicity="1" />
+    <End Role="Results" Type="Model.Results" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SportEvents">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Results">
+        <PropertyRef Name="eId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

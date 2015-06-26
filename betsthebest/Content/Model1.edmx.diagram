@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="761a6712743a4765b817774338b5b37f" Name="Диаграмма1" ZoomLevel="86">
+        <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Bets" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Messages" Width="1.5" PointX="5.125" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.News" Width="1.5" PointX="5.125" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Payments" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Results" Width="1.5" PointX="5.125" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SportEvents" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_dbo_Bets_dbo_AspNetUsers_userId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_dbo_Payments_dbo_AspNetUsers_userId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_dbo_Bets_dbo_SportEvents_betEventId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Results_ToEvents" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

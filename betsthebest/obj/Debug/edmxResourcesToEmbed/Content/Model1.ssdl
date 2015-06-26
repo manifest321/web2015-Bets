@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище Model" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Хранилище ModelContainer">
+    <EntitySet Name="AspNetUsers" EntityType="Хранилище Model.AspNetUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Bets" EntityType="Хранилище Model.Bets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Messages" EntityType="Хранилище Model.Messages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="News" EntityType="Хранилище Model.News" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Payments" EntityType="Хранилище Model.Payments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Results" EntityType="Хранилище Model.Results" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SportEvents" EntityType="Хранилище Model.SportEvents" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_dbo_Bets_dbo_AspNetUsers_userId" Association="Хранилище Model.FK_dbo_Bets_dbo_AspNetUsers_userId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Bets" EntitySet="Bets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Bets_dbo_SportEvents_betEventId" Association="Хранилище Model.FK_dbo_Bets_dbo_SportEvents_betEventId">
+      <End Role="SportEvents" EntitySet="SportEvents" />
+      <End Role="Bets" EntitySet="Bets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Payments_dbo_AspNetUsers_userId" Association="Хранилище Model.FK_dbo_Payments_dbo_AspNetUsers_userId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Payments" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Results_ToEvents" Association="Хранилище Model.FK_Results_ToEvents">
+      <End Role="SportEvents" EntitySet="SportEvents" />
+      <End Role="Results" EntitySet="Results" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="userAmount" Type="real" Nullable="false" />
+    <Property Name="userStatus" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="Bets">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="betEventId" Type="int" Nullable="false" />
+    <Property Name="userId" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="amount" Type="real" Nullable="false" />
+    <Property Name="state" Type="nvarchar(max)" />
+    <Property Name="betType" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Messages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="text" Type="nvarchar(max)" />
+    <Property Name="date" Type="datetime" Nullable="false" />
+    <Property Name="src" Type="nvarchar(max)" />
+    <Property Name="dest" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="nvarchar(max)" />
+    <Property Name="href" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Payments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="paymentDate" Type="datetime" Nullable="false" />
+    <Property Name="amount" Type="real" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Results">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="result" Type="int" Nullable="false" />
+    <Property Name="eId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SportEvents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="command1" Type="nvarchar(max)" />
+    <Property Name="command2" Type="nvarchar(max)" />
+    <Property Name="gameType" Type="nvarchar(max)" />
+    <Property Name="date" Type="datetime" Nullable="false" />
+    <Property Name="tournament" Type="nvarchar(max)" />
+    <Property Name="firstWin" Type="real" />
+    <Property Name="secondWin" Type="real" />
+    <Property Name="gameTie" Type="real" />
+    <Property Name="tieByFirst" Type="real" />
+    <Property Name="tieBySecond" Type="real" />
+    <Property Name="overallTie" Type="real" />
+    <Property Name="total" Type="real" />
+    <Property Name="b" Type="real" />
+    <Property Name="m" Type="real" />
+    <Property Name="state" Type="nvarchar(max)" />
+    <Property Name="time" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_dbo_Bets_dbo_AspNetUsers_userId">
+    <End Role="AspNetUsers" Type="Хранилище Model.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Bets" Type="Хранилище Model.Bets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bets">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Bets_dbo_SportEvents_betEventId">
+    <End Role="SportEvents" Type="Хранилище Model.SportEvents" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Bets" Type="Хранилище Model.Bets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SportEvents">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bets">
+        <PropertyRef Name="betEventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Payments_dbo_AspNetUsers_userId">
+    <End Role="AspNetUsers" Type="Хранилище Model.AspNetUsers" Multiplicity="1" />
+    <End Role="Payments" Type="Хранилище Model.Payments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payments">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Results_ToEvents">
+    <End Role="SportEvents" Type="Хранилище Model.SportEvents" Multiplicity="1" />
+    <End Role="Results" Type="Хранилище Model.Results" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SportEvents">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Results">
+        <PropertyRef Name="eId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
